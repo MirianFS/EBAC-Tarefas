@@ -1,12 +1,15 @@
 #language: pt
 
 Funcionalidade: Login na plataforma
+  Como usuário da loja
+  Deseja-se autenticar-se na plataforma
+  Para acessar o processo de checkout de forma segura
 
   Esquema do Cenário: Tentativa de login com diferentes credenciais
-    Dado que estou na página de login
-    Quando insiro o e-mail "<email>" e a senha "<senha>"
-    E clico no botão "Entrar"
-    Então devo ver "<resultado>"
+    Dado que o usuário acessa a página de login
+    Quando informa o e-mail "<email>" e a senha "<senha>"
+    E clica no botão "Entrar"
+    Então o sistema deve exibir "<resultado>"
 
     Exemplos:
       | email              | senha       | resultado                          |
