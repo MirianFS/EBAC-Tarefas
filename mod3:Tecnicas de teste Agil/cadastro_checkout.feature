@@ -1,37 +1,38 @@
-Feature: Cadastro no Checkout
+#language: pt
 
-  Scenario Outline: Validação dos campos obrigatórios no cadastro
-    Given que estou na página de cadastro
-    When preencho os campos obrigatórios com os seguintes dados:
-      | Nome    | Email            | Senha    | Endereço     | Telefone  |
-      | <nome>  | <email>          | <senha>  | <endereco>   | <telefone> |
-    And clico no botão "Cadastrar"
-    Then devo ver "<mensagem>"
+Funcionalidade: Cadastro no Checkout
 
-    Examples:
-      | nome   | email              | senha    | endereco       | telefone     | mensagem                                      |
-      | João   | joao@email.com     | senha123 | Rua A, 100     | 11999999999  | Cadastro realizado com sucesso                |
-      |        | maria@email.com    | senha123 | Rua B, 200     | 11988888888  | Nome é obrigatório                           |
-      | Pedro  |                   | senha123 | Rua C, 300     | 11977777777  | Email é obrigatório                          |
-      | Ana    | anaemail.com       | senha123 | Rua D, 400     | 11966666666  | Formato do email inválido                    |
-      | Lucas  | lucas@email.com    |         | Rua E, 500     | 11955555555  | Senha é obrigatória                          |
-      | Carol  | carol@email.com    | senha123 |                | 11944444444  | Endereço é obrigatório                       |
-      | Bruno  | bruno@email.com    | senha123 | Rua F, 600     |             | Telefone é obrigatório                       |
+  Esquema do Cenário: Validação dos campos obrigatórios no cadastro
+    Dado que estou na página de cadastro
+    Quando preencho os campos obrigatórios com:
+      nome "<nome>", email "<email>", senha "<senha>", endereço "<endereco>" e telefone "<telefone>"
+    E clico no botão "Cadastrar"
+    Então devo ver "<mensagem>"
 
-  Scenario: Mensagem de erro ao tentar cadastrar com campos vazios
-    Given que estou na página de cadastro
-    When tento cadastrar sem preencher nenhum campo
-    Then devo ver a mensagem "Todos os campos são obrigatórios"
+    Exemplos:
+      | nome   | email              | senha    | endereco       | telefone     | mensagem                                   |
+      | João   | joao@email.com     | senha123 | Rua A, 100     | 11999999999  | Cadastro realizado com sucesso             |
+      |        | maria@email.com    | senha123 | Rua B, 200     | 11988888888  | Nome é obrigatório                         |
+      | Pedro  |                    | senha123 | Rua C, 300     | 11977777777  | Email é obrigatório                        |
+      | Ana    | anaemail.com       | senha123 | Rua D, 400     | 11966666666  | Formato do email inválido                  |
+      | Lucas  | lucas@email.com    |          | Rua E, 500     | 11955555555  | Senha é obrigatória                        |
+      | Carol  | carol@email.com    | senha123 |                | 11944444444  | Endereço é obrigatório                     |
+      | Bruno  | bruno@email.com    | senha123 | Rua F, 600     |              | Telefone é obrigatório                     |
 
-  Scenario Outline: Validação do formato de e-mail
-    Given que estou na página de cadastro
-    When insiro um e-mail "<email>"
-    And clico no botão "Cadastrar"
-    Then devo ver a mensagem "<mensagem>"
+  Cenário: Mensagem de erro ao tentar cadastrar com campos vazios
+    Dado que estou na página de cadastro
+    Quando tento cadastrar sem preencher nenhum campo
+    Então devo ver a mensagem "Todos os campos são obrigatórios"
 
-    Examples:
-      | email             | mensagem                           |
+  Esquema do Cenário: Validação do formato de e-mail
+    Dado que estou na página de cadastro
+    Quando insiro um e-mail "<email>"
+    E clico no botão "Cadastrar"
+    Então devo ver a mensagem "<mensagem>"
+
+    Exemplos:
+      | email             | mensagem                          |
       | testeemail.com    | Formato do e-mail inválido        |
       | @gmail.com        | Formato do e-mail inválido        |
       | usuario@          | Formato do e-mail inválido        |
-      | usuario@email.com | Cadastro realizado com sucesso   |
+      | usuario@email.com | Cadastro realizado com sucesso    |

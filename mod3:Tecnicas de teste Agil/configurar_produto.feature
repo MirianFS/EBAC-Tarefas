@@ -1,29 +1,31 @@
-Feature: Configurar produto
+#language: pt
 
-  Scenario Outline: Seleção obrigatória de cor, tamanho e quantidade
-    Given que estou na página de configuração do produto
-    When seleciono a cor "<cor>", o tamanho "<tamanho>" e a quantidade "<quantidade>"
-    And clico no botão "Adicionar ao carrinho"
-    Then devo ver a mensagem "<mensagem>"
+Funcionalidade: Configurar produto
 
-    Examples:
-      | cor   | tamanho | quantidade | mensagem                                      |
-      |       | P       | 1          | Cor é obrigatória                             |
-      | Azul  |        | 1          | Tamanho é obrigatório                         |
-      | Azul  | M       |            | Quantidade é obrigatória                      |
-      | Azul  | M       | 5          | Produto adicionado ao carrinho com sucesso   |
+  Esquema do Cenário: Seleção obrigatória de cor, tamanho e quantidade
+    Dado que estou na página de configuração do produto
+    Quando seleciono a cor "<cor>", o tamanho "<tamanho>" e a quantidade "<quantidade>"
+    E clico no botão "Adicionar ao carrinho"
+    Então devo ver a mensagem "<mensagem>"
 
-  Scenario: Limite máximo de produtos por venda
-    Given que estou na página de configuração do produto
-    When seleciono uma quantidade maior que 10
-    Then devo ver uma mensagem de erro informando que o limite máximo permitido é 10
+    Exemplos:
+      | cor   | tamanho | quantidade | mensagem                                     |
+      |       | P       | 1          | Cor é obrigatória                            |
+      | Azul  |         | 1          | Tamanho é obrigatório                        |
+      | Azul  | M       |            | Quantidade é obrigatória                     |
+      | Azul  | M       | 5          | Produto adicionado ao carrinho com sucesso  |
 
-  Scenario Outline: Restaurar estado original ao limpar
-    Given que selecionei a cor "<cor>", o tamanho "<tamanho>" e a quantidade "<quantidade>"
-    When clico no botão "limpar"
-    Then todas as seleções devem ser removidas
+  Cenário: Limite máximo de produtos por venda
+    Dado que estou na página de configuração do produto
+    Quando seleciono uma quantidade maior que 10
+    Então devo ver uma mensagem de erro informando que o limite máximo permitido é 10
 
-    Examples:
+  Esquema do Cenário: Restaurar estado original ao limpar
+    Dado que selecionei a cor "<cor>", o tamanho "<tamanho>" e a quantidade "<quantidade>"
+    Quando clico no botão "limpar"
+    Então todas as seleções devem ser removidas
+
+    Exemplos:
       | cor   | tamanho | quantidade |
       | Azul  | P       | 2          |
       | Preto | M       | 5          |
